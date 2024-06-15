@@ -1,4 +1,3 @@
-
 <template>
   <Header/>
   <div class="container">
@@ -24,8 +23,8 @@ import TransactionList from './components/TransactionList.vue';
 import AddTransaction from './components/AddTransaction.vue';
 
 import { ref, computed, onMounted } from 'vue';
-
 import { useToast } from 'vue-toastification';
+import { useMediaQuery } from '@vueuse/core'; // Import useMediaQuery
 
 const toast = useToast();
 
@@ -38,6 +37,9 @@ onMounted(() => {
     transactions.value = savedTransactions;
   }
 });
+
+// Responsive design adjustments
+const isMobile = useMediaQuery('(max-width: 768px)'); // Define a reactive media query for mobile devices
 
 // Get total
 const total = computed(() => {
@@ -96,3 +98,18 @@ const saveTransactionsToLocalStorage = () => {
   localStorage.setItem('transactions', JSON.stringify(transactions.value));
 };
 </script>
+
+<style scoped>
+/* Add responsive styles here */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+}
+</style>
