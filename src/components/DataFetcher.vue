@@ -29,6 +29,7 @@ export default {
       try {
         const response = await axios.get(process.env.VUE_APP_API_URL);
         this.backendData = response.data;
+        console.log('Response from backend:', response.data); // Log the response data
       } catch (error) {
         console.error('There was an error fetching the data:', error);
         // Optionally, handle the error in the UI as well
